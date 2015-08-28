@@ -1,0 +1,26 @@
+{
+  "name": "min.css",
+  "version": "0.0.1",
+  "description": "CSS minifier to optimize your CSS code to make your website faster by decreasing the file size.",
+  "main": "min.css.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/w3core/min.css.git"
+  },
+  "bin": {
+    "min.css": "./min.css"
+  },
+  "keywords": [
+    "css",
+    "minify",
+    "compress",
+    "client",
+    "node.js"
+  ],
+  "author": "Max Chuhryaev <w3core@gmail.com>",
+  "license": "BSD License",
+  "bugs": {
+    "url": "https://github.com/w3core/min.css/issues/"
+  },
+  "homepage": "https://github.com/w3core/min.css/"
+}

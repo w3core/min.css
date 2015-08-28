@@ -1,0 +1,29 @@
+#!/usr/bin/env node
+
+/* min.css binary
+ * Usage: min.css [input-file1] [input-file2] [inputfileN] > [output-file]
+ */
+var fs = require('fs');
+var path = require('path');
+var root = path.dirname(fs.realpathSync(process.argv[1]));
+var mincss = require(root + '/min.css.js');
+
+var args = process.argv,
+    cmd = (args[2] || '-h').toLowerCase(),
+    files = args.slice(2),
+    json = JSON.parse(fs.readFileSync(root + '/package.json', 'utf-8')),
+    app = json.name + '@' + json.version,
+    usage = 'Usage: min.css [input-file1] [input-file2] [input-fileN] > [output-file]';
+
+if (cmd == '-v' || cmd == '--version') console.log('\n' + app + '\n');
+else if (cmd == '-h' || cmd == '--help') console.log('\n' + app + '\n' + app.replace(/./g, '=') + '\n' + usage + '\n');
+else {
+  var result = '';
+  for (var i in files) {
+    if (files.length > 1) {
+      result += (i>0?'\n':'') + '/* ' + path.basename(files[i]) + ' */ ';
+    }
+    result += mincss(fs.readFileSync(files[i], 'utf-8'));
+  }
+  console.log(result);
+}
