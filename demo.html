@@ -1,0 +1,245 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>min.css | CSS minifier</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="application/xhtml+xml; charset=utf-8" http-equiv="content-type" />
+    <script src="https://leaverou.github.io/prefixfree/prefixfree.min.js"></script>
+    <script src="https://rawgit.com/w3core/min.css/master/min.css.js"></script>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+    <h1 id="header">CSS minifier</h1>
+    <form id="body" action="javascript:void(0)">
+        <div class="box request">
+            <label class="head">Input</label>
+            <textarea class="body scrollbar" spellcheck="false" onchange="process()" onkeyup="process()">
+/* ## What is the min.css?
+
+"min.css" is a tiny, fast and efficient JavaScript library for minifying CSS files that really makes your website faster.
+
+https://github.com/w3core/min.css/
+
+*/
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif, Arial;
+}
+
+/* .scrollbar */
+.scrollbar {
+    resize: none;
+}
+.scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+.scrollbar:hover::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    background: rgba(100, 100, 100, 0.5);
+    background-clip: padding-box;
+}
+
+#header {
+    position: relative;
+    height: 46px;
+    line-height: 46px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 20px 0px;
+    background: #333333;
+    color: #eeeeee;
+    font-size: 20px;
+    box-shadow: inset 0px -8px 8px #222222;
+    text-shadow: 0px -1px 0 #000000;
+}
+
+#body {
+    position: absolute;
+    top: 46px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+}
+
+.box {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    height: 50%;
+}
+@media all and (min-width: 800px), all and (orientation: landscape) {
+    #body:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        margin-left: -1px;
+        z-index: 100;
+        background: #33aadd;
+        box-shadow: inset 0px 0px 1px #000000;
+    }
+    #body:after {content: ""; display: block; float: none; clear: both;}
+    #body > .box {
+        float: left;
+        height: 100%;
+        width: 50%;
+    }
+}
+.box > .head {
+    z-index: 2;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    padding: 0 20px;
+    background: #33aadd;
+    color: #ffffff;
+    text-shadow: 0px -1px #0077aa;
+    box-shadow: 0px 2px 2px -1px #111111;
+}
+.box > .body {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    top: 32px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: -32px 0px 0px;
+    padding: 42px 20px 10px;
+    overflow: auto;
+    outline: 0 none;
+    border: 0 none;
+    background: #222222;
+    color: #33aadd;
+    text-shadow: 0px -1px 0px #111111;
+}
+.box > .body::selection {
+    background: #999999;
+    color: #ffffff;
+}
+
+.box .head[title]:not([title=""]):after {
+    content: attr(title);
+    position: absolute;
+    right: 20px;
+    font-style: normal;
+    font-size: 14px;
+    vertical-align: top;
+    color: #333333;
+    text-shadow: 0px 1px #55ccff;
+}
+
+.ribbon {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    width: 250px;
+    height: 28px;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px;
+    padding: 0px;
+    border-radius: 4px 0px 0px;
+    transform: rotate(-45deg) translate3d(78px,42px,0);
+    box-shadow: 0px 0px 10px #ffffff,
+    inset 0px 0px 0px 2px #ffffff;
+    background: #eeeeee;
+    color: #111111;
+    text-shadow: 0px 1px #ffffff;
+    font: normal bold 12px/28px Arial, Helvetica, Tahoma, Verdana, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.1s linear;
+}
+.ribbon:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 0px;
+    border: 0px dotted #cccccc;
+    border-width: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px;
+}
+.ribbon:hover {
+    background: #0099ee;
+    box-shadow: 0px 0px 15px #000000;
+    color: #ffffff;
+    text-shadow: 0px -1px #004488;
+}
+.ribbon:hover:before {border-color: #22bbff}
+            </textarea>
+        </div>
+
+        <div class="box response">
+            <label class="head">Output</label>
+            <textarea class="body scrollbar" placeholder="Nothing to show yet..." spellcheck="false" style="white-space:pre" readonly></textarea>
+        </div>
+    </form>
+
+    <a class="ribbon" target="_blank" href="https://github.com/w3core/min.css/">Documentation</a>
+
+    <script type="text/javascript">
+      function toSize (bytes) {
+        return (bytes/1024 < 1)
+              ? bytes + ' bytes'
+              : ((bytes/1024) + '').replace(/^(\d+\.\d).*/, '$1') + 'kB'
+      }
+      function process () {
+         var str = document.querySelector('.box.request .body').value;
+         var inf_in = document.querySelector('.box.request .head');
+         var output = document.querySelector('.box.response .body');
+         var inf_out = document.querySelector('.box.response .head');
+         var start = new Date();
+         var css = mincss(str);
+         var end = new Date();
+         inf_in.setAttribute('title', toSize(str.length));
+         var inf = {
+           Size: toSize(css.length),
+           Time: (end - start)/1000 + ' sec',
+           Ratio: (str.length/css.length + '').replace(/^(\d+\.\d{1,2}).*/, '$1') + '~' + Math.round(100-(css.length*100/str.length)) + '%'
+         };
+         var res = '';
+         for (var i in inf) res += ' | '+i+': '+inf[i];
+         //console.log(inf);
+         inf_out.setAttribute('title', res.substr(2));
+         output.innerHTML = css;
+  
+         var style = document.getElementById('style');
+         if (style) style.parentNode.removeChild(style);
+  
+         var o = document.createElement("style");
+         o.id = 'style';
+         o.type = "text/css";
+         if(o.styleSheet) o.styleSheet.cssText = css;
+         else o.appendChild(document.createTextNode(css));
+         document.body.appendChild(o);
+      }
+      process();
+    </script>
+
+</body>
+</html>

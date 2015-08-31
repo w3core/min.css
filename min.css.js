@@ -1,3 +1,17 @@
+/**
+ * min.css
+ *
+ * min.css is a tiny, fast and efficient JavaScript library for minifying CSS
+ * files that really makes your website faster
+ *
+ * Site: https://github.com/w3core/min.css/
+ * Demo: https://rawgit.com/w3core/min.css/master/demo.html
+ *
+ * @version 0.0.1
+ *
+ * @license BSD License
+ * @author Max Chuhryaev
+ */
 function mincss (css) {
   function hue2rgb (m1, m2, hue) {
     var v;
