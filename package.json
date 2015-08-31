@@ -1,7 +1,7 @@
 {
   "name": "min.css",
   "version": "0.0.1",
-  "description": "CSS minifier to optimize your CSS code to make your website faster by decreasing the file size.",
+  "description": "A tiny, fast and efficient JavaScript library for minifying CSS files that really makes your website faster",
   "main": "min.css.js",
   "repository": {
     "type": "git",
