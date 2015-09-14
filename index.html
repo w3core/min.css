@@ -1,0 +1,104 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>min.css by w3core</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>min.css</h1>
+        <p>CSS minifier to optimize your CSS code to make your website faster by decreasing the file size.</p>
+
+        <p class="view"><a href="https://github.com/w3core/min.css">View the Project on GitHub <small>w3core/min.css</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/w3core/min.css/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/w3core/min.css/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/w3core/min.css">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h2>
+<a id="what-is-the-mincss" class="anchor" href="#what-is-the-mincss" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is the min.css?</h2>
+
+<p><a href="https://www.npmjs.com/package/min.css">min.css</a> is a tiny, ultrafast and efficient JavaScript library for minifying CSS files
+that really makes your website faster - <a href="https://rawgit.com/w3core/min.css/master/demo.html">Online demo</a>.</p>
+
+<h2>
+<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<h3>
+<a id="what-are-the-requirements" class="anchor" href="#what-are-the-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are the requirements?</h3>
+
+<p>Any version of <a href="https://nodejs.org/">Node.js</a> and nothing more. <a href="https://www.npmjs.com/package/min.css">min.css</a> is a JavaScript library and
+has not any dependencies. So it can be used anywhere, in any platform that 
+JavaScript supports.</p>
+
+<h3>
+<a id="how-to-install-mincss" class="anchor" href="#how-to-install-mincss" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install <a href="https://www.npmjs.com/package/min.css">min.css</a>?</h3>
+
+<pre><code>npm install -g min.css
+</code></pre>
+
+<h2>
+<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+
+<h3>
+<a id="how-to-use-mincss-via-cli" class="anchor" href="#how-to-use-mincss-via-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use <a href="https://www.npmjs.com/package/min.css">min.css</a> via CLI?</h3>
+
+<pre><code>min.css [input-file1] [input-file2] [input-fileN] &gt; [output-file]
+</code></pre>
+
+<p>Also <code>min.css</code> accepts the following command line arguments:</p>
+
+<pre><code>-h, --help     output usage information
+-v, --version  output the version number
+</code></pre>
+
+<p>For example, to minify a <code>main.css</code>, <code>icons.css</code> and <code>theme.css</code> files into <code>style.min.css</code> do:</p>
+
+<pre><code>min.css main.css icons.css theme.css &gt; style.min.css
+</code></pre>
+
+<h3>
+<a id="how-to-use-mincss-via-nodejs" class="anchor" href="#how-to-use-mincss-via-nodejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use <a href="https://www.npmjs.com/package/min.css">min.css</a> via <a href="https://nodejs.org/">Node.js</a>?</h3>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mincss <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>min.css<span class="pl-pds">'</span></span>);
+<span class="pl-k">var</span> input <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>html, body {  }<span class="pl-pds">'</span></span>;
+<span class="pl-k">var</span> output <span class="pl-k">=</span> mincss(input);</pre></div>
+
+<h2>
+<a id="what-mincss-do" class="anchor" href="#what-mincss-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What <a href="https://www.npmjs.com/package/min.css">min.css</a> do?</h2>
+
+<ul>
+<li>Removes all comments</li>
+<li>Removes all empty declarations</li>
+<li>Removes all whitespaces that are unnecessary (including around the meta characters, such as { } ( ) : ; &gt; ~ + etc.)</li>
+<li>Removes the last ";" in a rule declaration</li>
+<li>Removes leading zero in float value. For example: 0.5 &gt; .5</li>
+<li>Convert RGB color to HEX</li>
+<li>Convert HSL color to HEX</li>
+<li>Convert HEX color to short value when it's possible. For example: #CCCCCC &gt; #CCC</li>
+<li>Removes for all zero values units (such as %,px,pt,pc,rem,em,ex,cm,mm,in) that are unnecessary (excluding CSS keyframes). For example: border: 1px 0px &gt; border:1px 0</li>
+<li>Reduces values for margin,padding,border-width,border-color,border-style. For example: 1px 2px 1px 2px =&gt; 1px 2px</li>
+</ul>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/w3core">w3core</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
