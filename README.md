@@ -1,25 +1,25 @@
 ## What is the min.css?
 
-`min.css` is a tiny, fast and efficient JavaScript library for minifying CSS files
+[min.css] is a tiny, ultrafast and efficient JavaScript library for minifying CSS files
 that really makes your website faster - [Online demo](https://rawgit.com/w3core/min.css/master/demo.html).
 
 ## Installation
 
 ### What are the requirements?
 
-Any version of [Node.js] and nothing more. `min.css` is a JavaScript library and
+Any version of [Node.js] and nothing more. [min.css] is a JavaScript library and
 has not any dependencies. So it can be used anywhere, in any platform that 
 JavaScript supports.
 
-### How to install min.css?
+### How to install [min.css]?
 
 ```
-npm install min.css
+npm install -g min.css
 ```
 
 ## Usage
 
-### How to use min.css via CLI?
+### How to use [min.css] via CLI?
 
 ```
 min.css [input-file1] [input-file2] [input-fileN] > [output-file]
@@ -38,14 +38,14 @@ For example, to minify a `main.css`, `icons.css` and `theme.css` files into `sty
 min.css main.css icons.css theme.css > style.min.css
 ```
 
-### How to use min.css via [Node.js]?
+### How to use [min.css] via [Node.js]?
 
 ```javascript
 var mincss = require('min.css');
 var input = 'html, body {  }';
 var output = mincss(input);
 ```
-## What min.css do?
+## What [min.css] do?
 * Removes all comments
 * Removes all empty declarations
 * Removes all whitespaces that are unnecessary (including around the meta characters, such as { } ( ) : ; > ~ + etc.)
@@ -58,3 +58,4 @@ var output = mincss(input);
 * Reduces values for margin,padding,border-width,border-color,border-style. For example: 1px 2px 1px 2px => 1px 2px
 
 [node.js]: https://nodejs.org/
+[min.css]: https://www.npmjs.com/package/min.css
