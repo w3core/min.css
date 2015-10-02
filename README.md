@@ -1,3 +1,6 @@
+[![npm](https://img.shields.io/npm/v/min.css.svg)](https://www.npmjs.com/package/min.css)
+[![npm](https://img.shields.io/npm/l/min.css.svg)](https://www.npmjs.com/package/min.css)
+
 ## What is the min.css?
 
 [min.css] is a tiny, ultrafast and efficient JavaScript library for minifying CSS files
