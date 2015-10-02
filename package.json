@@ -1,6 +1,6 @@
 {
   "name": "min.css",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "A tiny, fast and efficient JavaScript library for minifying CSS files that really makes your website faster",
   "main": "min.css.js",
   "repository": {
