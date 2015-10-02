@@ -7,7 +7,7 @@
  * Site: https://github.com/w3core/min.css/
  * Demo: https://rawgit.com/w3core/min.css/master/demo.html
  *
- * @version 0.0.1
+ * @version 1.0.0
  *
  * @license BSD License
  * @author Max Chuhryaev
@@ -48,7 +48,7 @@ function mincss (css) {
   .replace(/ \{/g, '{') // Extra spaces
   .replace(/\;\}/g, '}') // Last semicolon
   .replace(/ ([+~>]) /g, '$1') // Extra spaces
-  .replace(/([^{][,: \(\)]0)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, };\(\)])/g, '$1$3') // Units for zero values
+  .replace(/([\: ,\(\)\\/])(\-*0)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, ;\(\)}\/]*?)/g, '$10$4') // Units for zero values
   .replace(/([: ,=\-\(])0\.(\d)/g, '$1.$2') // Lead zero for float values
   .replace(/([^\}]*\{\s*?\})/g, '') // Empty rules
   .replace(/(rgb|hsl)\((\d+)\D{1,2}(\d+)\D{1,2}(\d+)\D{0,1}\)/g, function (m, t, v1, v2, v3) { // RGB|HSL to HEX
