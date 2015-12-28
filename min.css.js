@@ -24,16 +24,16 @@ function mincss (css) {
     return 255 * v;
   }
   function hsl2rgb (h, s, l) {
-    var m1, m2, hue, r, g, b; s/=100; l/=100;
+    var m1, m2, hue, r, g, b; s/=100; l/=100, M=Math;
     if (!s) r = g = b = (l * 255);
     else {
       if (l <= 0.5) m2 = l * (s + 1);
       else m2 = l + s - l * s;
       m1 = l * 2 - m2;
       hue = h / 360;
-      r = Math.ceil(hue2rgb(m1, m2, hue + 1/3));
-      g = Math.ceil(hue2rgb(m1, m2, hue));
-      b = Math.ceil(hue2rgb(m1, m2, hue - 1/3));
+      r = M.ceil(hue2rgb(m1, m2, hue + 1/3));
+      g = M.ceil(hue2rgb(m1, m2, hue));
+      b = M.ceil(hue2rgb(m1, m2, hue - 1/3));
     }
     return {r: r, g: g, b: b};
   }
@@ -64,7 +64,7 @@ function mincss (css) {
   })
   .replace(/(margin|padding|border-width|border-color|border-style)\:([^;}]+)/gi, function (m,k,v){
     function chk () {
-      var o = arguments.length > 1 ? arguments : arguments.length == 1 ? arguments[0] : [];
+      var a = arguments, o = a.length > 1 ? a : a.length == 1 ? a[0] : [];
       for (var i=0; i<o.length; i++) {
         if (i==0) continue;
         if (o[i] != o[i-1]) return false;
