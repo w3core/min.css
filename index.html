@@ -1,104 +1,245 @@
-<!doctype html>
-<html>
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <title>min.css by w3core</title>
 
-    <link rel="stylesheet" href="stylesheets/styles.css">
-    <link rel="stylesheet" href="stylesheets/github-light.css">
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
-    <!--[if lt IE 9]>
-    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>min.css</h1>
-        <p>CSS minifier to optimize your CSS code to make your website faster by decreasing the file size.</p>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <title>min.css | CSS minifier</title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta content="application/xhtml+xml; charset=utf-8" http-equiv="content-type" />
+    <script src="https://leaverou.github.io/prefixfree/prefixfree.min.js"></script>
+    <script src="https://rawgit.com/w3core/min.css/master/css.min.js"></script>
+    <style type="text/css">
 
-        <p class="view"><a href="https://github.com/w3core/min.css">View the Project on GitHub <small>w3core/min.css</small></a></p>
+    </style>
+</head>
+<body>
+    <h1 id="header">CSS minifier</h1>
+    <form id="body" action="javascript:void(0)">
+        <div class="box request">
+            <label class="head">Input</label>
+            <textarea class="body scrollbar" spellcheck="false" onchange="process()" onkeyup="process()">
+/* ## What is the min.css?
 
+"min.css" is a tiny, fast and efficient JavaScript library for minifying CSS files that really makes your website faster.
 
-        <ul>
-          <li><a href="https://github.com/w3core/min.css/zipball/master">Download <strong>ZIP File</strong></a></li>
-          <li><a href="https://github.com/w3core/min.css/tarball/master">Download <strong>TAR Ball</strong></a></li>
-          <li><a href="https://github.com/w3core/min.css">View On <strong>GitHub</strong></a></li>
-        </ul>
-      </header>
-      <section>
-        <h2>
-<a id="what-is-the-mincss" class="anchor" href="#what-is-the-mincss" aria-hidden="true"><span class="octicon octicon-link"></span></a>What is the min.css?</h2>
+https://github.com/w3core/min.css/
 
-<p><a href="https://www.npmjs.com/package/min.css">min.css</a> is a tiny, ultrafast and efficient JavaScript library for minifying CSS files
-that really makes your website faster - <a href="https://rawgit.com/w3core/min.css/master/demo.html">Online demo</a>.</p>
+*/
 
-<h2>
-<a id="installation" class="anchor" href="#installation" aria-hidden="true"><span class="octicon octicon-link"></span></a>Installation</h2>
+html,
+body {
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    height: 100%;
+    font-family: sans-serif, Arial;
+}
 
-<h3>
-<a id="what-are-the-requirements" class="anchor" href="#what-are-the-requirements" aria-hidden="true"><span class="octicon octicon-link"></span></a>What are the requirements?</h3>
+/* .scrollbar */
+.scrollbar {
+    resize: none;
+}
+.scrollbar::-webkit-scrollbar {
+    width: 10px;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0);
+    background-clip: padding-box;
+}
+.scrollbar:hover::-webkit-scrollbar-thumb {
+    border: 3px solid transparent;
+    background: rgba(100, 100, 100, 0.5);
+    background-clip: padding-box;
+}
 
-<p>Any version of <a href="https://nodejs.org/">Node.js</a> and nothing more. <a href="https://www.npmjs.com/package/min.css">min.css</a> is a JavaScript library and
-has not any dependencies. So it can be used anywhere, in any platform that 
-JavaScript supports.</p>
+#header {
+    position: relative;
+    height: 46px;
+    line-height: 46px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 20px 0px;
+    background: #333333;
+    color: #eeeeee;
+    font-size: 20px;
+    box-shadow: inset 0px -8px 8px #222222;
+    text-shadow: 0px -1px 0px #000000;
+}
 
-<h3>
-<a id="how-to-install-mincss" class="anchor" href="#how-to-install-mincss" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to install <a href="https://www.npmjs.com/package/min.css">min.css</a>?</h3>
+#body {
+    position: absolute;
+    top: 46px;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    overflow: auto;
+}
 
-<pre><code>npm install -g min.css
-</code></pre>
+.box {
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    height: 50%;
+}
+@media all and (min-width: 800px), all and (orientation: landscape) {
+    #body:before {
+        content: "";
+        display: block;
+        position: absolute;
+        left: 50%;
+        width: 1px;
+        height: 100%;
+        margin-left: -1px;
+        z-index: 100;
+        background: #33aadd;
+        box-shadow: inset 0px 0px 1px #000000;
+    }
+    #body:after {content: ""; display: block; float: none; clear: both;}
+    #body > .box {
+        float: left;
+        height: 100%;
+        width: 50%;
+    }
+}
+.box > .head {
+    z-index: 2;
+    display: block;
+    position: relative;
+    box-sizing: border-box;
+    width: 100%;
+    height: 32px;
+    line-height: 32px;
+    padding: 0px 20px 0px 20px;
+    background: #33aadd;
+    color: #ffffff;
+    text-shadow: 0px -1px #0077aa;
+    box-shadow: 0px 2px 2px -1px #111111;
+}
+.box > .body {
+    display: block;
+    position: absolute;
+    box-sizing: border-box;
+    top: 32px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    margin: -32px 0px 0px;
+    padding: 42px 20px 10px;
+    overflow: auto;
+    outline: 0px none;
+    border: 0px none;
+    background: #222222;
+    color: #33aadd;
+    text-shadow: 0px -1px 0px #111111;
+}
+.box > .body::selection {
+    background: #999999;
+    color: #ffffff;
+}
 
-<h2>
-<a id="usage" class="anchor" href="#usage" aria-hidden="true"><span class="octicon octicon-link"></span></a>Usage</h2>
+.box .head[title]:not([title=""]):after {
+    content: attr(title);
+    position: absolute;
+    right: 20px;
+    font-style: normal;
+    font-size: 14px;
+    vertical-align: top;
+    color: #333333;
+    text-shadow: 0px 1px #55ccff;
+}
 
-<h3>
-<a id="how-to-use-mincss-via-cli" class="anchor" href="#how-to-use-mincss-via-cli" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use <a href="https://www.npmjs.com/package/min.css">min.css</a> via CLI?</h3>
+.ribbon {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    width: 250px;
+    height: 28px;
+    bottom: 0px;
+    right: 0px;
+    margin: 0px 0px 0px 0px;
+    padding: 0px 0px 0px 0px;
+    border-radius: 4px 0px 0px;
+    transform: rotate(-45deg) translate3d(78px,42px,0);
+    box-shadow: 0px 0px 10px #ffffff,
+    inset 0px 0px 0px 2px #ffffff;
+    background: #eeeeee;
+    color: #111111;
+    text-shadow: 0px 1px #ffffff;
+    font: normal bold 12px/28px Arial, Helvetica, Tahoma, Verdana, sans-serif;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.1s linear;
+}
+.ribbon:before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 2px;
+    bottom: 2px;
+    left: 2px;
+    right: 0px;
+    border: 0px dotted #cccccc;
+    border-width: 2px 0px 2px 2px;
+    border-radius: 4px 0px 0px;
+}
+.ribbon:hover {
+    background: #0099ee;
+    box-shadow: 0px 0px 15px #000000;
+    color: #ffffff;
+    text-shadow: 0px -1px #004488;
+}
+.ribbon:hover:before {border-color: #22bbff}
+            </textarea>
+        </div>
 
-<pre><code>min.css [input-file1] [input-file2] [input-fileN] &gt; [output-file]
-</code></pre>
+        <div class="box response">
+            <label class="head">Output</label>
+            <textarea class="body scrollbar" placeholder="Nothing to show yet..." spellcheck="false" style="white-space:pre" readonly></textarea>
+        </div>
+    </form>
 
-<p>Also <code>min.css</code> accepts the following command line arguments:</p>
+    <a class="ribbon" target="_blank" href="https://github.com/w3core/min.css/">Documentation</a>
 
-<pre><code>-h, --help     output usage information
--v, --version  output the version number
-</code></pre>
+    <script type="text/javascript">
+      function toSize (bytes) {
+        return (bytes/1024 < 1)
+              ? bytes + ' bytes'
+              : ((bytes/1024) + '').replace(/^(\d+\.\d).*/, '$1') + 'kB'
+      }
+      function process () {
+         var str = document.querySelector('.box.request .body').value;
+         var inf_in = document.querySelector('.box.request .head');
+         var output = document.querySelector('.box.response .body');
+         var inf_out = document.querySelector('.box.response .head');
+         var start = new Date();
+         var css = mincss(str);
+         var end = new Date();
+         inf_in.setAttribute('title', toSize(str.length));
+         var inf = {
+           Size: toSize(css.length),
+           Time: (end - start)/1000 + ' sec',
+           Ratio: (str.length/css.length + '').replace(/^(\d+\.\d{1,2}).*/, '$1') + '~' + Math.round(100-(css.length*100/str.length)) + '%'
+         };
+         var res = '';
+         for (var i in inf) res += ' | '+i+': '+inf[i];
+         //console.log(inf);
+         inf_out.setAttribute('title', res.substr(2));
+         output.innerHTML = css;
+  
+         var style = document.getElementById('style');
+         if (style) style.parentNode.removeChild(style);
+  
+         var o = document.createElement("style");
+         o.id = 'style';
+         o.type = "text/css";
+         if(o.styleSheet) o.styleSheet.cssText = css;
+         else o.appendChild(document.createTextNode(css));
+         document.body.appendChild(o);
+      }
+      process();
+    </script>
 
-<p>For example, to minify a <code>main.css</code>, <code>icons.css</code> and <code>theme.css</code> files into <code>style.min.css</code> do:</p>
-
-<pre><code>min.css main.css icons.css theme.css &gt; style.min.css
-</code></pre>
-
-<h3>
-<a id="how-to-use-mincss-via-nodejs" class="anchor" href="#how-to-use-mincss-via-nodejs" aria-hidden="true"><span class="octicon octicon-link"></span></a>How to use <a href="https://www.npmjs.com/package/min.css">min.css</a> via <a href="https://nodejs.org/">Node.js</a>?</h3>
-
-<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> mincss <span class="pl-k">=</span> <span class="pl-c1">require</span>(<span class="pl-s"><span class="pl-pds">'</span>min.css<span class="pl-pds">'</span></span>);
-<span class="pl-k">var</span> input <span class="pl-k">=</span> <span class="pl-s"><span class="pl-pds">'</span>html, body {  }<span class="pl-pds">'</span></span>;
-<span class="pl-k">var</span> output <span class="pl-k">=</span> mincss(input);</pre></div>
-
-<h2>
-<a id="what-mincss-do" class="anchor" href="#what-mincss-do" aria-hidden="true"><span class="octicon octicon-link"></span></a>What <a href="https://www.npmjs.com/package/min.css">min.css</a> do?</h2>
-
-<ul>
-<li>Removes all comments</li>
-<li>Removes all empty declarations</li>
-<li>Removes all whitespaces that are unnecessary (including around the meta characters, such as { } ( ) : ; &gt; ~ + etc.)</li>
-<li>Removes the last ";" in a rule declaration</li>
-<li>Removes leading zero in float value. For example: 0.5 &gt; .5</li>
-<li>Convert RGB color to HEX</li>
-<li>Convert HSL color to HEX</li>
-<li>Convert HEX color to short value when it's possible. For example: #CCCCCC &gt; #CCC</li>
-<li>Removes for all zero values units (such as %,px,pt,pc,rem,em,ex,cm,mm,in) that are unnecessary (excluding CSS keyframes). For example: border: 1px 0px &gt; border:1px 0</li>
-<li>Reduces values for margin,padding,border-width,border-color,border-style. For example: 1px 2px 1px 2px =&gt; 1px 2px</li>
-</ul>
-      </section>
-      <footer>
-        <p>This project is maintained by <a href="https://github.com/w3core">w3core</a></p>
-        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
-      </footer>
-    </div>
-    <script src="javascripts/scale.fix.js"></script>
-    
-  </body>
+</body>
 </html>
