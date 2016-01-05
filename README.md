@@ -4,7 +4,7 @@
 ## What is the min.css?
 
 [min.css] is a tiny, ultrafast and efficient JavaScript library for minifying CSS files
-that really makes your website faster - [Online demo](https://rawgit.com/w3core/min.css/master/demo.html).
+that really makes your website faster - [Online service](https://w3core.github.io/min.css/).
 
 ## Installation
 
