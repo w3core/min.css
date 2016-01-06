@@ -24,7 +24,7 @@ function mincss (css) {
     return 255 * v;
   }
   function hsl2rgb (h, s, l) {
-    var m1, m2, hue, r, g, b; s/=100; l/=100, M=Math;
+    var m1, m2, hue, r, g, b, M=Math; s/=100; l/=100;
     if (!s) r = g = b = (l * 255);
     else {
       if (l <= 0.5) m2 = l * (s + 1);
@@ -44,13 +44,16 @@ function mincss (css) {
   return String(css)
   .replace(/\/\*[\s\S]*?\*\//g, ' ') // Comments
   .replace(/\s+/g, ' ') // Extra spaces
-  .replace(/([\(\)\{\}\:\;\,]) /g, '$1') // Extra spaces
+  .replace(/^\s+/g, '') // Extra spaces
+  .replace(/ ?([\(\)\{\}\:\;\,]) /g, '$1') // Extra spaces
   .replace(/ \{/g, '{') // Extra spaces
   .replace(/\;\}/g, '}') // Last semicolon
   .replace(/ ([+~>]) /g, '$1') // Extra spaces
   .replace(/([\: ,\(\)\\/])(\-*0)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, ;\(\)}\/]*?)/g, '$10$4') // Units for zero values
-  .replace(/([: ,=\-\(])0\.(\d)/g, '$1.$2') // Lead zero for float values
+  .replace(/([: ,=\-\(\{\}])0+\.(\d)/g, '$1.$2') // Lead zero for float values
   .replace(/([^\}]*\{\s*?\})/g, '') // Empty rules
+  .replace(/ (\!important)/g, '$1')
+  .replace(/\:(\:before|\:after)/g, '$1')
   .replace(/(rgb|hsl)\((\d+)\D{1,2}(\d+)\D{1,2}(\d+)\D{0,1}\)/g, function (m, t, v1, v2, v3) { // RGB|HSL to HEX
     if (t.toLowerCase() == 'hsl') {
       var o = hsl2rgb(v1, v2, v3);
@@ -78,7 +81,8 @@ function mincss (css) {
     else if (o.length == 4 && chk(o[1],o[3])) r = o[0] + ' ' + o[1] + ' ' + o[2];
     r = k + ':' + r;
     return r;
-  });
+  })
+  ;
 }
 
 if (typeof module !== 'undefined' && module.exports) module.exports = mincss;
