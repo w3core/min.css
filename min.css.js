@@ -5,9 +5,9 @@
  * files that really makes your website faster
  *
  * Site: https://github.com/w3core/min.css/
- * Demo: https://rawgit.com/w3core/min.css/master/demo.html
+ * Online: https://w3core.github.io/min.css/
  *
- * @version 1.0.0
+ * @version 1.1
  *
  * @license BSD License
  * @author Max Chuhryaev

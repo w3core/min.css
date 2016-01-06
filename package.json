@@ -1,6 +1,6 @@
 {
   "name": "min.css",
-  "version": "1.0.0",
+  "version": "1.1",
   "description": "A tiny, fast and efficient JavaScript library for minifying CSS files that really makes your website faster",
   "main": "min.css.js",
   "repository": {
@@ -15,7 +15,8 @@
     "minify",
     "compress",
     "client",
-    "node.js"
+    "node.js",
+    "online"
   ],
   "author": "Max Chuhryaev <w3core@gmail.com>",
   "license": "BSD License",
