@@ -7,7 +7,7 @@
  * Site: https://github.com/w3core/min.css/
  * Online: https://w3core.github.io/min.css/
  *
- * @version 1.1
+ * @version 1.2
  *
  * @license BSD License
  * @author Max Chuhryaev
@@ -49,22 +49,31 @@ function mincss (css) {
   .replace(/ \{/g, '{') // Extra spaces
   .replace(/\;\}/g, '}') // Last semicolon
   .replace(/ ([+~>]) /g, '$1') // Extra spaces
-  .replace(/([\: ,\(\)\\/])(\-*0)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, ;\(\)}\/]*?)/g, '$10$4') // Units for zero values
+  .replace(/([\: ,\(\)\\/])(\-*0+)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, ;\(\)}\/]*?)/g, '$10$4') // Units for zero values
   .replace(/([: ,=\-\(\{\}])0+\.(\d)/g, '$1.$2') // Lead zero for float values
   .replace(/([^\}]*\{\s*?\})/g, '') // Empty rules
+  .replace(/(?:{)([^{}]+?)(?:})/g, function(m,s){
+    s = s.split(/;/g);
+    m = {};
+    for(var i=0; i<s.length; i++) {
+      var v = s[i].split(":");
+      m[v[0]] = v[1];
+    }
+    s = [];
+    for(var j in m) s.push(j + ":" + m[j]);
+    return "{" + s.join(";") + "}";
+  })
   .replace(/ (\!important)/g, '$1')
   .replace(/\:(\:before|\:after)/g, '$1')
-  .replace(/(rgb|hsl)\((\d+)\D{1,2}(\d+)\D{1,2}(\d+)\D{0,1}\)/g, function (m, t, v1, v2, v3) { // RGB|HSL to HEX
-    if (t.toLowerCase() == 'hsl') {
+  .replace(/(rgb|rgba|hsl|hsla)\((\d+)\D{1,2}(\d+)\D{1,2}(\d+)\D{0,1}\,?(1?)\)/g, function (m, t, v1, v2, v3) { // RGB|RGBA-1|HSL|HSLA-1 to HEX
+    t = t.toLowerCase();
+    if (!t.indexOf('hsl')) {
       var o = hsl2rgb(v1, v2, v3);
       v1 = o.r; v2 = o.g; v3 = o.b;
     }
     return rgb2hex(v1, v2, v3);
   })
-  .replace(/([,: \(])#([0-9a-f]{6})/gi, function (m, pfx, clr) { // HEX code reducing
-    if (clr[0] == clr[1] && clr[2] == clr[3] && clr[4] == clr[5]) return pfx + '#' + clr[0] + clr[2] + clr[4];
-    return pfx + '#' + clr;
-  })
+  .replace(/([,: \(]#)([0-9a-f])\2([0-9a-f])\3([0-9a-f])\4/gi, '$1$2$3$4')
   .replace(/(margin|padding|border-width|border-color|border-style)\:([^;}]+)/gi, function (m,k,v){
     function chk () {
       var a = arguments, o = a.length > 1 ? a : a.length == 1 ? a[0] : [];
