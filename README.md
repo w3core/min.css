@@ -51,11 +51,12 @@ var output = mincss(input);
 ## What [min.css] do?
 * Removes all comments
 * Removes all empty declarations
+* Removes all rules that was redeclared.
 * Removes all whitespaces that are unnecessary (including around the meta characters, such as { } ( ) : ; > ~ + etc.)
 * Removes the last ";" in a rule declaration
 * Removes leading zero in float value. For example: 0.5 > .5
-* Convert RGB color to HEX
-* Convert HSL color to HEX
+* Convert RGB|RGBA-1 color to HEX
+* Convert HSL|HSLA-1 color to HEX
 * Convert HEX color to short value when it's possible. For example: #CCCCCC > #CCC
 * Removes for all zero values units (such as %,px,pt,pc,rem,em,ex,cm,mm,in) that are unnecessary (excluding CSS keyframes). For example: border: 1px 0px > border:1px 0
 * Reduces values for margin,padding,border-width,border-color,border-style. For example: 1px 2px 1px 2px => 1px 2px
