@@ -7,7 +7,7 @@
  * Site: https://github.com/w3core/min.css/
  * Online: https://w3core.github.io/min.css/
  *
- * @version 1.2
+ * @version 1.3
  *
  * @license BSD License
  * @author Max Chuhryaev
@@ -45,27 +45,44 @@ function mincss (css) {
   .replace(/\/\*[\s\S]*?\*\//g, ' ') // Comments
   .replace(/\s+/g, ' ') // Extra spaces
   .replace(/^\s+/g, '') // Extra spaces
-  .replace(/ ?([\(\)\{\}\:\;\,]) /g, '$1') // Extra spaces
   .replace(/ \{/g, '{') // Extra spaces
   .replace(/\;\}/g, '}') // Last semicolon
   .replace(/ ([+~>]) /g, '$1') // Extra spaces
   .replace(/([\: ,\(\)\\/])(\-*0+)(%|px|pt|pc|rem|em|ex|cm|mm|in)([, ;\(\)}\/]*?)/g, '$10$4') // Units for zero values
   .replace(/([: ,=\-\(\{\}])0+\.(\d)/g, '$1.$2') // Lead zero for float values
   .replace(/([^\}]*\{\s*?\})/g, '') // Empty rules
+  .replace(/(\*)([.:\[])/g, '$2') // Remove * in selector
+  .replace(/(\[)([^"' \]]+)(["'])([^"' \]]+)(\3)(\])/g, '$1$2$4$6') // Quote wrapped attribute values
   .replace(/(?:{)([^{}]+?)(?:})/g, function(m,s){
-    s = s.split(/;/g);
+    var url = [], r = [];
+    s = s.replace(/(url\s*\([^)]*\))/g, function(m){
+      url.push(m);
+      return '$'+(url.length-1)+'$';
+    });
+    s = s.match(/([a-z\-]+)\:(.+?)(;|$)/gi);
+    for(var i=0; i<s.length; i++) {
+      s[i] = /([a-z\-]+)\:(.+?)(;|$)/i.exec(s[i]);
+      if (s[i]) s[i][2] = s[i][2].replace(/\$([0-9]+)\$/g, function(m,k){
+        return url[k] || '';
+      });
+    }
     m = {};
     for(var i=0; i<s.length; i++) {
-      var v = s[i].split(":");
-      m[v[0]] = v[1];
+      if(s[i]) {
+        if(s[i][1] == "background" || s[i][1] == "background-image") { // skip background gradients
+          r.push(s[i][1] + ':' + s[i][2]);
+          continue;
+        }
+        m[s[i][1]] = s[i][2];
+      }
     }
-    s = [];
-    for(var j in m) s.push(j + ":" + m[j]);
-    return "{" + s.join(";") + "}";
+    for(var i in m) r.push(i + ":" + m[i]);
+    return "{" + r.join(";") + "}";
   })
   .replace(/ (\!important)/g, '$1')
   .replace(/\:(\:before|\:after)/g, '$1')
-  .replace(/(rgb|rgba|hsl|hsla)\((\d+)\D{1,2}(\d+)\D{1,2}(\d+)\D{0,1}\,?(1?)\)/g, function (m, t, v1, v2, v3) { // RGB|RGBA-1|HSL|HSLA-1 to HEX
+  .replace(/(rgb|rgba|hsl|hsla)\s*\(\s*(\d+)[, %]+(\d+)[, %]+(\d+)[, %]+?([0-1]?)\s*\)/g, function (m, t, v1, v2, v3, v4) { // RGB|RGBA-1|HSL|HSLA-1 to HEX
+    if (v4 === "0") return " transparent ";
     t = t.toLowerCase();
     if (!t.indexOf('hsl')) {
       var o = hsl2rgb(v1, v2, v3);
@@ -73,7 +90,8 @@ function mincss (css) {
     }
     return rgb2hex(v1, v2, v3);
   })
-  .replace(/([,: \(]#)([0-9a-f])\2([0-9a-f])\3([0-9a-f])\4/gi, '$1$2$3$4')
+  .replace(/([,: \(]#)([0-9a-f])\2([0-9a-f])\3([0-9a-f])\4/gi, '$1$2$3$4') // HEX color reducing
+  .replace(/ ?([\(\)\{\}\:\;\,]) /g, '$1') // Extra spaces
   .replace(/(margin|padding|border-width|border-color|border-style)\:([^;}]+)/gi, function (m,k,v){
     function chk () {
       var a = arguments, o = a.length > 1 ? a : a.length == 1 ? a[0] : [];
