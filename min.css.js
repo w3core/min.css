@@ -7,7 +7,7 @@
  * Site: https://github.com/w3core/min.css/
  * Online: https://w3core.github.io/min.css/
  *
- * @version 1.3
+ * @version 1.3.1
  *
  * @license BSD License
  * @author Max Chuhryaev
@@ -108,6 +108,9 @@ function mincss (css) {
     else if (o.length == 4 && chk(o[1],o[3])) r = o[0] + ' ' + o[1] + ' ' + o[2];
     r = k + ':' + r;
     return r;
+  })
+  .replace(/\:\s*calc\(([^;}]+)/g, function ($0) { // Repair CSS3 calc conditions
+    return $0.replace(/\s+/g, "").replace(/([-+*/]+)/g, " $1 ");
   })
   ;
 }
