@@ -41,7 +41,10 @@ function mincss (css) {
     return '#' + ((1 << 24) + ((1*r) << 16) + ((1*g) << 8) + (1*b)).toString(16).slice(1);
   }
 
+  var whiteSpacePlaceHolder = '|_|';
+
   return String(css)
+  .replace(/(:not\(.*?\))\s+(?!{)/g, '$1' + whiteSpacePlaceHolder) // Mark whitespace after :not() selectors for preservation
   .replace(/\/\*[\s\S]*?\*\//g, ' ') // Comments
   .replace(/\s+/g, ' ') // Extra spaces
   .replace(/^\s+/g, '') // Extra spaces
@@ -112,6 +115,7 @@ function mincss (css) {
   .replace(/\:\s*calc\(([^;}]+)/g, function ($0) { // Repair CSS3 calc conditions
     return $0.replace(/\s+/g, "").replace(/([-+*/]+)/g, " $1 ");
   })
+  .replace(/\|_\|/g, ' ') // Re-insert whitespaces that should be preserved
   ;
 }
 
