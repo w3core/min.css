@@ -110,7 +110,7 @@ function mincss (css) {
     return r;
   })
   .replace(/\:\s*calc\(([^;}]+)/g, function ($0) { // Repair CSS3 calc conditions
-    return $0.replace(/\s+/g, "").replace(/([-+*/]+)/g, " $1 ");
+    return $0.replace(/\s+/g, "").replace(/([-+*/]+)/g, " $1 ").replace(/(--)\s/g, "$1");
   })
   ;
 }
